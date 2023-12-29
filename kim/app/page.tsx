@@ -7,7 +7,6 @@ import Content from './ui/content';
 import ActionForm from './ui/form';
 
 
-
 export default function Home() {
 
   const [selectedStudent, setSelectedStudent] = useState<any>(null);
