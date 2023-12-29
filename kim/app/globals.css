@@ -3,9 +3,6 @@
 @tailwind utilities;
 
 
-.move-right {
-  transition: padding-left 0.3s ease;
-}
 
 .cursor-pointer.active {
   font-weight: bold;
@@ -15,6 +12,7 @@
   opacity: 0.5;
 }
 
-.move-right span {
-  padding-left: 10px; 
+.move{
+  padding-left: 20px;
+  transition: padding-left 0.3s ease;
 }

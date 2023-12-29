@@ -43,20 +43,20 @@ export default function Home() {
         <ul>
           {studentList.map((student, index) => (
             <li
-              className={`cursor-pointer ${clickedName === student.name ? 'active' : ''} h-10 w-56`}
+              className={`flex cursor-pointer ${clickedName === student.name ? 'active' : ''} h-10 w-56`}
               key={index}
               onClick={() => handleStudentClick(student)}
             >
-              <span className={`${clickedName === student.name ? 'move-right' : ''}`}>
-                {selectedStudent && selectedStudent.name === student.name ? '· ' : ''}
-                {student.name}
-              </span>
+              {clickedName === student.name && (
+                <div className="relative top-3 transform -translate-y-1/2 w-2 h-2 bg-slate-600 rounded-full"></div>
+                )}
+                <div className = {`${clickedName === student.name ? 'move' : ''}`}>{student.name}</div>
             </li>
           ))}
         </ul>
       </div>
       <div className="h-3/4 border"></div>
-      <div>
+      <div className="w-3/5 pl-8">
         <div>
           <p>{selectedStudent ? selectedStudent.name : ''} 소개</p>
           <div>{introduce}</div>
