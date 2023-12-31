@@ -39,39 +39,40 @@ export default function Home() {
 
   return (
     <div className="w-lvw h-lvh flex justify-center items-center">
-      <div>
+      <div className="h-5/6">
         <ul>
           {studentList.map((student, index) => (
             <li
-              className={`flex cursor-pointer ${clickedName === student.name ? 'active' : ''} h-10 w-56`}
+              className={`flex cursor-pointer ${clickedName === student.name ? 'active' : ''} h-10 w-56 `}
               key={index}
               onClick={() => handleStudentClick(student)}
             >
               {clickedName === student.name && (
                 <div className="relative top-3 transform -translate-y-1/2 w-2 h-2 bg-slate-600 rounded-full"></div>
                 )}
-                <div className = {`${clickedName === student.name ? 'move' : ''}`}>{student.name}</div>
+                <div className = {`${clickedName === student.name ? 'move' : ''} text-xs`}>{student.name}</div>
             </li>
           ))}
         </ul>
       </div>
-      <div className="h-3/4 border"></div>
-      <div className="w-3/5 pl-8">
+      <div className="h-5/6 w-px bg-gray-300"></div>
+      <div className="w-3/5 h-5/6 pl-6">
         <div>
-          <p>{selectedStudent ? selectedStudent.name : ''} 소개</p>
-          <div>{introduce}</div>
-        </div>
+          <p className="text-2xl">{selectedStudent ? selectedStudent.name : ''} 소개</p>&nbsp;
+          <div className='text-neutral-400 text-xs w-5/6 break-all '>{introduce}</div>&nbsp;
+        </div>&nbsp;
         <div>
-          <p>{selectedStudent ? selectedStudent.name : ''} 장점</p>
-          <div>{advantage}</div>
-        </div>
-        <form className="flex flex-col" onSubmit={handleFormSubmit}>
+          <p className="text-2xl">{selectedStudent ? selectedStudent.name : ''} 장점</p>&nbsp;
+          <div className='text-neutral-400 text-xs w-5/6 break-all'>{advantage}</div>
+        </div>&nbsp;
+        <form className="flex flex-col w-5/6" onSubmit={handleFormSubmit}>
           <input
+            className='pl-6 h-8 rounded-xl'
             type="text"
-            placeholder="Write student's name"
+            placeholder="Write student's name."
             onChange={(e) => setName(e.target.value)}
-          />
-          <button type="submit">Show</button>
+          />&nbsp;
+          <button className="bg-gray-300 text-white rounded-xl h-14" type="submit">Show</button>
         </form>
       </div>
     </div>

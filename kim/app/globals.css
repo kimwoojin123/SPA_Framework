@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-
+body{
+  background-color: #E8E8E8;
+}
 
 .cursor-pointer.active {
   font-weight: bold;
@@ -13,6 +15,6 @@
 }
 
 .move{
-  padding-left: 20px;
+  padding-left: 10vw;
   transition: padding-left 0.3s ease;
 }
