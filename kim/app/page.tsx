@@ -1,7 +1,18 @@
 'use client'
+
 import React, { useState } from 'react';
 import studentList from './data/students';
 import './globals.css';
+import Content from './ui/content';
+import Form from './ui/form';
+import SideNav from './ui/sideNav';
+
+
+/**
+ * @file Home 페이지
+ * @description Home 페이지 컴포넌트
+ */
+
 
 export default function Home() {
   const [selectedStudent, setSelectedStudent] = useState<any>(null);
@@ -9,12 +20,29 @@ export default function Home() {
   const [introduce, setIntroduce] = useState('');
   const [advantage, setAdvantage] = useState('');
 
+
+
+
+    /**
+   * 학생을 클릭했을 때 해당 학생의 자료들 설정.
+   * @param {Object} student - 클릭된 학생 정보
+   * @returns {void}
+   */
+
   const handleStudentClick = (student: any) => {
     setSelectedStudent(student);
     setName(student.name);
     setIntroduce(student.introduce);
     setAdvantage(student.advantage);
   };
+
+
+
+    /**
+   * 폼 submit시 자료객체에서 입력한 이름과 일치하는 소개와 장점 표시.
+   * @param {React.FormEvent<HTMLFormElement>} event - 폼 이벤트 객체
+   * @returns {void}
+   */
 
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -35,41 +63,20 @@ export default function Home() {
 
   return (
     <div className="w-lvw h-lvh flex justify-center items-center">
-      <div className="h-5/6">
-        <ul>
-          {studentList.map((student, index) => (
-            <li
-              className={`flex cursor-pointer ${name === student.name ? 'active' : ''} h-10 w-56 `}
-              key={index}
-              onClick={() => handleStudentClick(student)}
-            >
-              {name === student.name && (
-                <div className="relative top-3 transform -translate-y-1/2 w-2 h-2 bg-slate-600 rounded-full"></div>
-                )}
-                <div className = {`${name === student.name ? 'move' : ''} text-xs`}>{student.name}</div>
-            </li>
-          ))}
-        </ul>
-      </div>
+      {/* 사이드 내비게이션 영역 */}
+      <SideNav studentList={studentList} name={name} onClick={handleStudentClick} />
+
+      {/* 수직 분할선 */}
       <div className="h-5/6 w-px bg-gray-300"></div>
-      <div className="w-3/5 h-5/6 pl-6">
-        <div>
-          <p className="text-2xl">{selectedStudent ? selectedStudent.name : ''} 소개</p>&nbsp;
-          <div className='text-neutral-400 text-xs w-5/6 break-all '>{introduce}</div>&nbsp;
-        </div>&nbsp;
-        <div>
-          <p className="text-2xl">{selectedStudent ? selectedStudent.name : ''} 장점</p>&nbsp;
-          <div className='text-neutral-400 text-xs w-5/6 break-all'>{advantage}</div>
-        </div>&nbsp;
-        <form className="flex flex-col w-5/6" onSubmit={handleFormSubmit}>
-          <input
-            className='pl-6 h-8 rounded-xl'
-            type="text"
-            placeholder="Write student's name."
-            onChange={(e) => setName(e.target.value)}
-          />&nbsp;
-          <button className="bg-gray-300 text-white rounded-xl h-14" type="submit">Show</button>
-        </form>
+
+      {/* 콘텐츠 영역 */}
+      <div className='w-3/5 pl-6'>
+
+        {/* 학생 정보 */}
+        <Content selectedStudent={selectedStudent} introduce={introduce} advantage={advantage} />
+
+        {/* 검색 폼 */}
+        <Form onSubmit={handleFormSubmit} onChange={(e) => setName(e.target.value)} />
       </div>
     </div>
   );

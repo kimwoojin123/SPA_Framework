@@ -1,32 +1,30 @@
 import React from 'react';
-import './sideNav.css';
 
-type Student = {
+interface SideNavProps {
+  studentList: any[];
   name: string;
-  introduce: string;
-  advantage: string;
-};
+  onClick: (student: any) => void;
+}
 
-type SideNavProps = {
-  studentList: Student[];
-  handleStudentClick: (student: Student) => void;
-  selectedStudent: Student | null;
-};
-
-export default function SideNav({ studentList, handleStudentClick, selectedStudent }: SideNavProps) {
+const SideNav: React.FC<SideNavProps> = ({ studentList, name, onClick }) => {
   return (
-    <div>
-      <ul className='w-32'>
+    <div className="h-5/6">
+      <ul>
         {studentList.map((student, index) => (
           <li
+            className={`flex cursor-pointer ${name === student.name ? 'active' : ''} h-10 w-56 `}
             key={index}
-            className={`cursor-pointer h-10`}
-            onClick={() => handleStudentClick(student)} // Pass the whole 'student' object
+            onClick={() => onClick(student)}
           >
-            {selectedStudent && selectedStudent.name === student.name ? '· ' : ''}{student.name}
+            {name === student.name && (
+              <div className="relative top-3 transform -translate-y-1/2 w-2 h-2 bg-slate-600 rounded-full"></div>
+            )}
+            <div className={`${name === student.name ? 'move' : ''} text-xs`}>{student.name}</div>
           </li>
         ))}
       </ul>
     </div>
   );
-}
+};
+
+export default SideNav;

@@ -1,19 +1,22 @@
 import React from 'react';
 
-type ActionForm = {
-  setName: React.Dispatch<React.SetStateAction<string>>;
-  handleFormSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-};
+interface FormProps {
+  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
-export default function ActionForm({ setName, handleFormSubmit }: ActionForm) {
+const Form: React.FC<FormProps> = ({ onSubmit, onChange }) => {
   return (
-    <form className="flex flex-col" onSubmit={handleFormSubmit}>
+    <form className="flex flex-col w-5/6" onSubmit={onSubmit}>
       <input
+        className='pl-6 h-8 rounded-xl'
         type="text"
-        placeholder="Write student's name"
-        onChange={(e) => setName(e.target.value)}
-      />
-      <button className="bg-gray-300" type="submit">Show</button>
+        placeholder="Write student's name."
+        onChange={onChange}
+      />&nbsp;
+      <button className="bg-gray-300 text-white rounded-xl h-14" type="submit">Show</button>
     </form>
   );
-}
+};
+
+export default Form;
