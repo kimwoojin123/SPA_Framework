@@ -8,14 +8,12 @@ export default function Home() {
   const [name, setName] = useState('');
   const [introduce, setIntroduce] = useState('');
   const [advantage, setAdvantage] = useState('');
-  const [clickedName, setClickedName] = useState<string | null>(null);
 
   const handleStudentClick = (student: any) => {
     setSelectedStudent(student);
     setName(student.name);
     setIntroduce(student.introduce);
     setAdvantage(student.advantage);
-    setClickedName(student.name); // 클릭한 이름 설정
   };
 
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -25,10 +23,8 @@ export default function Home() {
     );
     if (foundStudent) {
       setSelectedStudent(foundStudent);
-      setName(foundStudent.name);
       setIntroduce(foundStudent.introduce);
       setAdvantage(foundStudent.advantage);
-      setClickedName(foundStudent.name); // 이름을 입력한 경우 설정
     } else {
       setSelectedStudent(null);
       setIntroduce('');
@@ -43,14 +39,14 @@ export default function Home() {
         <ul>
           {studentList.map((student, index) => (
             <li
-              className={`flex cursor-pointer ${clickedName === student.name ? 'active' : ''} h-10 w-56 `}
+              className={`flex cursor-pointer ${name === student.name ? 'active' : ''} h-10 w-56 `}
               key={index}
               onClick={() => handleStudentClick(student)}
             >
-              {clickedName === student.name && (
+              {name === student.name && (
                 <div className="relative top-3 transform -translate-y-1/2 w-2 h-2 bg-slate-600 rounded-full"></div>
                 )}
-                <div className = {`${clickedName === student.name ? 'move' : ''} text-xs`}>{student.name}</div>
+                <div className = {`${name === student.name ? 'move' : ''} text-xs`}>{student.name}</div>
             </li>
           ))}
         </ul>
